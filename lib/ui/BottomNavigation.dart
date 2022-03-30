@@ -1,26 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   runApp(
       const MaterialApp(
-        home: OhHttpClient(),
+        home: BottomNavigation(),
       ));
 }
 
-class OhHttpClient extends StatefulWidget {
+class BottomNavigation extends StatefulWidget {
 
-  const OhHttpClient({Key? key}) : super(key: key);
+  const BottomNavigation({Key? key}) : super(key: key);
 
   @override
   _OhHttpClient createState() => _OhHttpClient();
 
 }
 
-class _OhHttpClient extends State<OhHttpClient> {
+class _OhHttpClient extends State<BottomNavigation> {
   int _bottomNavigationItem = 0;
-    bool visible=true ;
+    bool visible=false;
+
 
   @override
   void initState() {
