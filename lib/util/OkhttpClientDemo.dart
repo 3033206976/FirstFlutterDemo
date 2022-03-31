@@ -8,9 +8,14 @@ import 'package:untitled1/data/CategoriesJson.dart';
 
  void main()async{
   var jsonData= await OkhttpClientDemo().categories();
-  jsonData.result.categories?.forEach((element) {
-    print(element.data.toString());
-  });
+  var categories=jsonData.result.categories;
+    for(var i in categories!){
+      print(i.data?.name);
+      i.children?.forEach((element) {
+        print(i.data?.name);
+      });
+  }
+
   // var categoriesJsonData=jsonData.result?.categories;
   // print(categoriesJsonData);
 

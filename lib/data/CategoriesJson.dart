@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
@@ -23,12 +25,13 @@ class CategoriesJson {
 
 class Result {
   @JsonKey(name: 'categories')
-  final List<BranchJson>? categories;
+  final List<BranchJson<Object?>>? categories;
 
-  Result.fromJson(Map<String, dynamic> json)
-      : categories = (json['categories'] as List)
-            .map((e) => BranchJson.fromJson(e))
-            .toList();
+  Result.fromJson(Map<String, dynamic> json) :categories
+  =((json['categories'])).map((e) => BranchJson.fromJson(e)).toList() as List<BranchJson<Object>>;
+      // : categories = ((json['categories']) as List)
+      //       .map((e) => BranchJson.fromJson(e))
+      //       .toList();
 
   // (List<BranchJson>.from(json['categories']) as List).map((e) =>
   //     BranchJson.fromJson(e)).toList();
@@ -36,26 +39,26 @@ class Result {
   Map<String, dynamic> toJson() => <String, dynamic>{
         'categories': categories,
       };
+  Result(this.categories);}
 
-  Result(this.categories);
-}
-
-class BranchJson {
+class BranchJson<T>{
   @JsonKey(name: 'data')
   final Data? data;
   @JsonKey(name: 'id')
   final int? id;
   @JsonKey(name: 'children')
-   final List<Data> children;
+   final List<BranchJson<Data?>>? children;
 
   BranchJson.fromJson(Map<String, dynamic> json)
       : data = Data.fromJson(json['data']),
         id = json['id'],
-        children =
-            (json['children'] as List).map((e) => Data.fromJson(e)).toList();
+  children= ((json['children'])as List).map((e) => Data.fromJson(e)).toList() as List<BranchJson<Data>>;
+        // children =((json['children'])as List ).map((e) => Data.fromJson(e)).toList();
 
   BranchJson(this.data, this.children, this.id);
 }
+
+
 
 class Data {
   @JsonKey(name: 'name')
