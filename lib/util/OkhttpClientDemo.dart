@@ -1,5 +1,20 @@
+
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:untitled1/data/CategoriesJson.dart';
+
+
+ void main()async{
+  var jsonData= await OkhttpClientDemo().categories();
+  jsonData.result.categories?.forEach((element) {
+    print(element.data.toString());
+  });
+  // var categoriesJsonData=jsonData.result?.categories;
+  // print(categoriesJsonData);
+
+}
 
 class OkhttpClientDemo {
   static String url = 'https://ca001.pluttershop.com/';
@@ -20,6 +35,8 @@ class OkhttpClientDemo {
     Response response;
     response = await _projectUrl()
         .get("api/catalogue/category/", options: Options(method: 'GET'));
+    Map<String,dynamic> map=response.data;
+    print('<----------  反序列化  ${json.encode(map)} -----------');
     return CategoriesJson.fromJson(response.data);
   }
 }
